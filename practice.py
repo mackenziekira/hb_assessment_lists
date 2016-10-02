@@ -170,14 +170,16 @@ def sum_numbers(numbers):
         >>> sum_numbers([])
         0
     """
-    total = 0
-    for number in numbers:
-        total += number
-    return total
+    # solves with a for loop
 
-    #come back to this. see if you can write fewer lines using the enumerate function
-    # sum_numbers = [number + total for number in numbers]
-    # return sum_numbers.pop()
+    # total = 0
+    # for number in numbers:
+    #     total += number
+    # return total
+
+    # solves with a lambda function
+    return reduce(lambda x, y: x + y, numbers, 0)
+    
 
 
 def mult_numbers(numbers):
@@ -199,10 +201,15 @@ def mult_numbers(numbers):
         >>> mult_numbers([])
         1
     """
-    product = 1
-    for number in numbers:
-        product *= number
-    return product
+    # solves with a for loop
+
+    # product = 1
+    # for number in numbers:
+    #     product *= number
+    # return product
+
+    # solves using the reduce function
+    return reduce(lambda x, y: x * y, numbers, 1)
 
 
 def join_strings(words):
@@ -221,10 +228,14 @@ def join_strings(words):
         >>> join_strings([])
         ''
     """
-    jibberish = ""
-    for word in words:
-        jibberish += word
-    return jibberish
+    # solves with a for loop
+    # jibberish = ""
+    # for word in words:
+    #     jibberish += word
+    # return jibberish
+
+    # solves with reduce
+    return reduce(lambda x, y: x + y, words, "")
 
 
 def average(numbers):
@@ -309,16 +320,13 @@ def reverse_list(items):
     #     reversed_list.append(items_copy.pop())
     # return reversed_list
 
+    # implemented with a lambda function
+    # return sorted(items, key = lambda x: items.index(x), reverse = True)
+
+    # implemented as a list comprehension
+    #return [items[-index] for index in range(1,len(items)+1)]
+
     return items[len(items)::-1]
-
-    # try implementing with a lambda function?
-
-    # return sorted(items, key = lambda x: int(x)-1)
-
-    #try this as a list comprehension (with enumerate)?
-
-    # items_copy = items[:]
-    # return [items_copy for item in items_copy]
 
 
 def reverse_list_in_place(items):
@@ -376,14 +384,17 @@ def duplicates(items):
         >>> orig
         ['apple', 'apple', 'berry']
     """
-    singles = []
-    doubles = []
-    for item in items:
-        if item in singles and item not in doubles:
-            doubles.append(item)
-        elif item not in singles:
-            singles.append(item)
-    return sorted(doubles)
+    # singles = []
+    # doubles = []
+    # for item in items:
+    #     if item in singles and item not in doubles:
+    #         doubles.append(item)
+    #     elif item not in singles:
+    #         singles.append(item)
+    # return sorted(doubles)
+
+    return sorted(list(set([item for item in items if items.count(item) > 1])))
+
 
 
 def find_letter_indices(words, letter):
@@ -422,6 +433,12 @@ def find_letter_indices(words, letter):
         else:
             letter_indices.append(None)
     return letter_indices
+
+    
+
+    # uses index method. not allowed, but wanted to try a list comprehension for this
+
+    #return [word.index(letter) if letter in word else None for word in words]
 
 #####################################################################
 # END OF PRACTICE: You can ignore everything below.
